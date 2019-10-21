@@ -1,0 +1,24 @@
+image: node:latest
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+stages:
+  - test
+  - build
+job1:
+  stage: test
+  script:
+    # - cd client
+    - npm run test
+job2:
+  stage: build
+  script:
+    # - cd client
+    - npm run build
+  cache:
+    key: ${CI_job2}
+    paths:
+      - ./node_modules
+    policy: push
